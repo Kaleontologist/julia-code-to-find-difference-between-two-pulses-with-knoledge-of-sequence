@@ -1,0 +1,67 @@
+for i in 1:500
+           freq = 18
+           fps = 16402.85+0.052+0.00001*i
+           for j in 1:25
+               er = (11372-fps/freq+0.04*j)/fps
+               count1 = 0
+
+               for n in 1:42
+                   if stuff(fps, freq, er)[n][2] == resu[n]
+                       count1 += 1
+                   end
+               end
+               if count1 > m
+                   m = count1
+               end
+               if count1 > 35
+                   varr = 100000
+                   varr2 = 10000
+                   for n in 1:44
+                       if stuff(fps, freq, er)[n][1] < varr
+                           varr = stuff(fps,freq, er)[n][1]
+                       end
+                   end
+                   if varr == stuff(fps, freq, er)[44][1]
+                               println(fps)
+                               println(er)
+                               println(stuff(fps, freq, er))
+                               println(count1)
+                               println(m)
+                               aaa = stuff(fps, freq, er)[40][1]-stuff(fps, freq, er)[7][1]
+                               if aaa < varr2
+                                   println(aaa)
+                                   varr2 = aaa
+                               end
+                   end
+               end
+           end
+       println(i)
+end
+function stuff(fps, freq, er)
+    a=1/fps
+    c = []
+    am = []
+    stepp = []
+    for i in 1:45
+        cam = (1/freq)*i+er
+        push!(c, cam)
+        for j in 1:55000
+            amb = a*j
+            if amb > cam
+                if amb-a < cam
+                    allsp = 10^9*(amb - cam)
+                    mka = [allsp, j]
+                    push!(am, mka)
+                    push!(stepp, j)
+                end
+                if amb - a == cam
+                    allsp = 10^9*(amb - cam)
+                    mka = [allsp, j]
+                    push!(am, mka)
+                    push!(stepp, j)
+                end
+            end
+        end
+    end
+    return am
+end
